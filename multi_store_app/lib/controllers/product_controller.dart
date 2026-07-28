@@ -122,4 +122,35 @@ class ProductController {
       throw Exception("Error loading top Rated Products: $e");
     }
   }
+
+  Future<List<Product>> loadProductsBySubcategory(String subcategory) async {
+    try {
+      http.Response response = await http.get(
+        Uri.parse("$uri/api/products-by-subcategory/$subcategory"),
+        headers: <String, String>{
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      );
+
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        List<dynamic> data = json.decode(response.body) as List<dynamic>;
+
+        List<Product> relatedProducts = data
+            .map(
+              (relatedProduct) =>
+                  Product.fromMap(relatedProduct as Map<String, dynamic>),
+            )
+            .toList();
+        return relatedProducts;
+      } else if (response.statusCode == 404) {
+        return [];
+      } else {
+        throw Exception("Failed to load subcategory products");
+      }
+    } catch (e) {
+      throw Exception("Error loading subcategory product: $e");
+    }
+  }
 }

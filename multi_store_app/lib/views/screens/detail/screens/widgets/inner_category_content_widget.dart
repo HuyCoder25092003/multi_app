@@ -11,6 +11,7 @@ import 'package:multi_store_app/views/screens/nav_screens/widgets/reusable_text_
 import '../../../../../models/product.dart';
 import '../../../../../models/subcategory.dart';
 import '../../../nav_screens/widgets/product_item_widget.dart';
+import '../subcategory_product_screen.dart';
 
 class InnerCategoryContentWidget extends StatefulWidget {
   final Category category;
@@ -92,9 +93,23 @@ class _InnerCategoryContentWidgetState
                                         : end,
                                   )
                                   .map(
-                                    (subcategory) => SubcategoryTileWidget(
-                                      image: subcategory.image,
-                                      title: subcategory.subCategoryName,
+                                    (subcategory) => GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return SubcategoryProductScreen(
+                                                subcategory: subcategory,
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      },
+                                      child: SubcategoryTileWidget(
+                                        image: subcategory.image,
+                                        title: subcategory.subCategoryName,
+                                      ),
                                     ),
                                   )
                                   .toList(),
