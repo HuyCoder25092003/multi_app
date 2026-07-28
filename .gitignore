@@ -1,0 +1,59 @@
+# =========================
+# Flutter / Dart
+# =========================
+**/.dart_tool/
+**/.packages
+**/.pub-cache/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+**/coverage/
+
+# Android generated files
+**/android/.gradle/
+**/android/local.properties
+**/android/key.properties
+
+# iOS / macOS generated files
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/Flutter/ephemeral/
+
+# Desktop Flutter generated files
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+
+# =========================
+# Node.js Backend
+# =========================
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables / Secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Signing keys
+*.jks
+*.keystore
+**/key.properties
+
+# =========================
+# IDE
+# =========================
+**/.idea/
+**/.vscode/
+*.iml
+
+# =========================
+# Operating system
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
