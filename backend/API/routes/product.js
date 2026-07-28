@@ -132,4 +132,32 @@ router.route("/api/search-products").get(async (req, res) => {
     }
 });
 
+router.route("/api/edit-product/:productId",auth,vendorAuth).put(async(req,res)=>{
+    try {
+        const { productId } = req.params;
+        const product = await Product.findById(productId);
+        if (!product){
+            return res.status(404).json({ msg: "Product not found" });
+        }
+
+        if(product.vendorId.toString() != req.user.id){
+            return res.status(403).json({msg: "Unauthorized to edit this product"});
+        }
+
+        const {vendorId, ...updateData} = req.body;
+
+        const updateProduct = await Product.findByIdAndUpdate(
+            productId, 
+            {$set: updateData}, 
+            {new: true},
+        );
+
+        return res.status(200).json(updateProduct);
+
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+});
+
+
 module.exports = router;

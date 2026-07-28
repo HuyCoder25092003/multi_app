@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String uri = "http://10.0.2.2:3000";
+const String uri = "https://backend001-99aead6357b6.herokuapp.com";
 
 const String loginRoute = "/login";
 
