@@ -14,4 +14,6 @@ const String shippingAddressScreenRoute = "/shippingAddressScreen";
 
 const String orderScreenRoute = "/orderScreen";
 
+const String searchProductScreenRoute = "/searchProductScreen";
+
 final GlobalKey<FormState> formKey = GlobalKey<FormState>();

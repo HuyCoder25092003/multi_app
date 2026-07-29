@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:multi_store_app/views/screens/nav_screens/widgets/header/header_button.dart';
 
+import '../../../../../global_variables.dart';
+
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({super.key});
 
@@ -23,6 +25,9 @@ class HeaderWidget extends StatelessWidget {
               width: 250,
               height: 50,
               child: TextField(
+                onTap: () {
+                  Navigator.pushNamed(context, searchProductScreenRoute);
+                },
                 decoration: InputDecoration(
                   hintText: "Enter text",
                   hintStyle: const TextStyle(

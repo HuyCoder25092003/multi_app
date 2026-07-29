@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:multi_store_app/provider/user_provider.dart';
 import 'package:multi_store_app/views/screens/detail/screens/checkout_screen.dart';
 import 'package:multi_store_app/views/screens/detail/screens/order_screen.dart';
+import 'package:multi_store_app/views/screens/detail/screens/search_product_screen.dart';
 import 'package:multi_store_app/views/screens/detail/screens/shipping_address_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -61,6 +62,7 @@ class MyApp extends ConsumerWidget {
         checkOutScreenRoute: (context) => CheckoutScreen(),
         shippingAddressScreenRoute: (context) => ShippingAddressScreen(),
         orderScreenRoute: (context) => OrderScreen(),
+        searchProductScreenRoute: (context) => SearchProductScreen(),
       },
       debugShowCheckedModeBanner: false,
     );

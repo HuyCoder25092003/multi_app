@@ -120,7 +120,7 @@ router.route("/api/search-products").get(async (req, res) => {
 
         if (!query)
             return res.status(404).json({ msg: "Query parameter required" });
-        const products = await Product.find({ $or: [{ productName: { $regrex: query, $options: "i" } , description: { $regrex: query, $options: "i" } }] });
+        const products = await Product.find({ $or: [{ productName: { $regex: query, $options: "i" } , description: { $regex: query, $options: "i" } }] });
 
         if (!products || products.length == 0)
             return res.status(404).json({ msg: "No Products found matching the query" });
