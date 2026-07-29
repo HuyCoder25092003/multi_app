@@ -1,6 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const Order = require("../models/order");
 const {auth,vendorAuth} = require("../middleware/auth");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY); 
 
 var router = express.Router();
 
@@ -19,6 +21,9 @@ router.route("/api/orders",auth).post(async(req, res) => {
             image,
             buyerId,
             vendorId,
+            paymentStatus,
+            paymentIntentId,
+            paymentMethod,
         } = req.body;
 
         const createdAt = new Date().getMilliseconds()
@@ -36,7 +41,10 @@ router.route("/api/orders",auth).post(async(req, res) => {
             image,
             buyerId,
             vendorId,
-            createdAt
+            createdAt,
+            paymentStatus,
+            paymentIntentId,
+            paymentMethod,
         });
         await order.save();
         return res.status(201).send(order);
@@ -137,6 +145,32 @@ router.route("/api/orders").get(async(req,res)=>{
         res.status(200).json(orders);
     } catch (e) {
         res.status(500).json({ error: e.message });
+    }
+});
+
+router.route("/api/payment-intent",auth).post(async(req,res)=>{
+    try {
+        const {amount, currency} = req.body;
+
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount, currency
+        });
+
+        return res.status(200).json(paymentIntent);
+
+    } catch (e) {
+        return res.status(500).json({ error: e.message });
+    }
+});
+
+router.route("/api/payment-intent/:id").get(async(req,res)=>{
+    try {
+        const paymentIntent = await stripe.paymentIntents.retrieve(req.params.id);
+
+        return res.status(200).json(paymentIntent);
+
+    } catch (e) {
+        return res.status(500).json({ error: e.message });
     }
 });
 

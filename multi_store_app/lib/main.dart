@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:multi_store_app/provider/user_provider.dart';
 import 'package:multi_store_app/views/screens/detail/screens/checkout_screen.dart';
 import 'package:multi_store_app/views/screens/detail/screens/order_screen.dart';
@@ -13,7 +14,14 @@ import './views/screens/authentication_screens/login_screen.dart';
 import './views/screens/authentication_screens/register_screen.dart';
 import './views/screens/main_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Stripe.publishableKey =
+      "pk_test_51TyWrzA4bFSZIOtmWQxzXi5VRNN3rKhPRBI1Hz3o9KGeses1wzLKJE33rU6bvnAUS3kr6mG524luW370VAvyYIST00gnvGP1zG";
+
+  await Stripe.instance.applySettings();
+
   runApp(ProviderScope(child: const MyApp()));
 }
 
