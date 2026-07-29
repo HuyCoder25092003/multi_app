@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const Order = require("../models/order");
 const {auth,vendorAuth} = require("../middleware/auth");
